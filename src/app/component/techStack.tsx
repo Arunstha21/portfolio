@@ -42,7 +42,7 @@ const techStack: TechItem[] = [
   {
     name: "Next.js",
     logo: "./nextjs.svg",
-    description: "React Framework for SSR",
+    description: "React Framework for Full Stack",
     link: "https://nextjs.org/",
     class: "invert",
   },

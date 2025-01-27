@@ -5,7 +5,6 @@ import { Github, Linkedin, Mail, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import TechStack from "./component/techStack";
-import CustomCursor from "./component/customCursor";
 
 export default function Home() {
   const containerVariants = {
@@ -24,35 +23,16 @@ export default function Home() {
     visible: {
       y: 0,
       opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      },
     },
-  };
+  }
 
   return (
-    <div className="flex flex-col min-h-screen p-5 md:px-32 xl:px-64">
-      <CustomCursor />
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-2xl font-mono text-sky-600 hover:text-sky-500 transition-colors"
-          >
-            {"{A}"}
-          </Link>
-          <ul className="flex gap-6">
-            {["Home", "Projects", "About"].map((item) => (
-              <li key={item}>
-                <Link
-                  href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  className="hover:text-sky-500 transition-colors"
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <hr className="h-px mt-3 bg-gray-200 border-0 dark:bg-gray-700"/>
-      </header>
+    <div className="flex flex-col min-h-screen">
       <main className="flex-grow container mx-auto px-4 mt-4 md:px-6 lg:px-8">
         <motion.div
           className="max-w-3xl mx-auto mb-16"

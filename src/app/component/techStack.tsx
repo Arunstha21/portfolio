@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 
 interface TechItem {
   name: string
@@ -68,28 +68,34 @@ const techStack: TechItem[] = [
   },
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
+    },
+  },
+}
+
 export default function TechStack() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  }
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
 
   return (
     <motion.section
@@ -97,7 +103,7 @@ export default function TechStack() {
       className="py-16"
       variants={containerVariants}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={inView ? "visible" : "hidden"}
     >
       <motion.h1 variants={itemVariants} className="text-6xl font-bold text-center mb-16">
         Tech Stack
@@ -111,7 +117,11 @@ export default function TechStack() {
               rel="noopener noreferrer"
               className="group block p-6 transition-all duration-300"
             >
-              <div className="flex items-center gap-4">
+              <motion.div
+                className="flex items-center gap-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <div className="w-12 h-12 relative flex-shrink-0">
                   <Image
                     src={tech.logo || "/placeholder.svg"}
@@ -121,13 +131,16 @@ export default function TechStack() {
                   />
                 </div>
                 <div className="flex-grow">
-                  <div >
+                  <div>
                     <h3 className="text-lg font-medium group-hover:text-sky-500 transition-colors">{tech.name}</h3>
                     <p className="text-sm text-gray-500">{tech.description}</p>
                   </div>
-                  <div className="h-px bg-gray-200 mt-4 group-hover:bg-sky-500 transition-colors" />
+                  <motion.div
+                    className="h-px bg-gray-200 mt-4 group-hover:bg-sky-500 transition-colors"
+                    whileHover={{ scaleX: 1.05, originX: 0 }}
+                  />
                 </div>
-              </div>
+              </motion.div>
             </Link>
           </motion.div>
         ))}

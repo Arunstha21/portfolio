@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight, Star, Code, Lock, Unlock } from "lucide-react"
+import { ArrowUpRight, Lock, Unlock } from "lucide-react"
 import { getGitHubRepos, type GitHubRepo } from "@/lib/github"
-import { ProjectSkeleton } from "@/components/ProjectSkeleton"
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -51,7 +50,6 @@ const containerVariants = {
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<GitHubRepo[]>([])
-  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -59,12 +57,9 @@ export default function ProjectsPage() {
       try {
         const repos = await getGitHubRepos()
         setProjects(repos)
-        console.log(repos);
-        
-        setIsLoading(false)
       } catch (err) {
+        console.log(err)
         setError("Failed to fetch projects. Please try again later.")
-        setIsLoading(false)
       }
     }
 
@@ -157,6 +152,7 @@ export default function ProjectsPage() {
             </motion.div>
           </motion.div>
         ))}
+        {error && (<motion.div className="text-red-500 text-center col-span-full">{error}</motion.div> )}
       </motion.div>
     </div>
     </div>

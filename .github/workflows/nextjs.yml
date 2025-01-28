@@ -31,6 +31,8 @@ jobs:
     env:
       NEXT_PUBLIC_GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
+    - name: Debug Environment Variables
+        run: echo "Token length: ${#NEXT_PUBLIC_GITHUB_TOKEN}"
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager

@@ -36,12 +36,12 @@ export default function AboutPage() {
           </div>
         </motion.div>
         <motion.p className="mb-6" variants={itemVariants}>
-          I'm a passionate full stack web developer with a love for creating dynamic and user-friendly web applications.
-          With expertise in modern web technologies. I'm always eager to learn and adapt to new challenges.
+          I&apos;m a passionate full stack web developer with a love for creating dynamic and user-friendly web applications.
+          With expertise in modern web technologies. I&apos;m always eager to learn and adapt to new challenges.
         </motion.p>
         <motion.p variants={itemVariants}>
-          I'm always excited to take on new challenges and contribute to innovative projects. Feel free to reach out if
-          you'd like to collaborate or just have a chat about web development!
+          I&apos;m always excited to take on new challenges and contribute to innovative projects. Feel free to reach out if
+          you&apos;d like to collaborate or just have a chat about web development!
         </motion.p>
       </motion.div>
     </div>

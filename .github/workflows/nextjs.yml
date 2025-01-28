@@ -65,10 +65,6 @@ jobs:
           static_site_generator: next
       - name: Debug Environment Variables
         run: echo "Token length ${#NEXT_PUBLIC_GITHUB_TOKEN}"
-        env:
-          NEXT_PUBLIC_GITHUB_TOKEN: ${{ secrets.github_token }}
-      - name: List available secrets
-        run: echo "Available secrets ${{ toJson(secrets) }}"
       - name: Restore cache
         uses: actions/cache@v4
         with:

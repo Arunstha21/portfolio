@@ -14,6 +14,7 @@ export interface GitHubRepo {
 export async function getGitHubRepos(): Promise<GitHubRepo[]> {
 
     const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN
+    console.log(token);
     
     const response = await fetch(`${GITHUB_API_URL}/user/repos?sort=updated&direction=desc`, {
       headers: {

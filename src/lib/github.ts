@@ -1,4 +1,3 @@
-'use server'
 const GITHUB_API_URL = "https://api.github.com"
 
 export interface GitHubRepo {
@@ -12,9 +11,10 @@ export interface GitHubRepo {
   topics: string[]
 }
 
-const token = process.env.GITHUB_TOKEN;
-
 export async function getGitHubRepos(): Promise<GitHubRepo[]> {
+
+    const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN
+    
     const response = await fetch(`${GITHUB_API_URL}/user/repos?sort=updated&direction=desc`, {
       headers: {
         Authorization: `Bearer ${token}`,
